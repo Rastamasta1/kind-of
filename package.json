@@ -20,9 +20,11 @@
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "main": "index.js",
+  "types": "./index.d.ts",
   "exports": {
     ".": "./index.js",
     "./package.json": "./package.json"
