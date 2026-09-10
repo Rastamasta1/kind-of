@@ -23,6 +23,10 @@
     "index.js"
   ],
   "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
   "engines": {
     "node": ">=0.10.0"
   },
