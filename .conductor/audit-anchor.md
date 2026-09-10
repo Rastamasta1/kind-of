@@ -12,32 +12,40 @@ path is reserved, and a push whose payload contains it is refused.
 ## The anchor
 
 ```
-chain head sequence      32523
-chain head hash          492b2945d855872496ce517a1b91b20e47e9fbfd8bbcdd0d1db7477cd67d8c6a
-head row written at      2026-09-10T08:47:23.452Z
+chain head sequence      32582
+chain head hash          5ed89d2c9360574f528d70af21e5e203525125daf2cabf2e2c00a9ce29d1d5c1
+head row written at      2026-09-10T08:51:05.958Z
 chain genesis at         2026-06-26T10:52:06.958Z
-published at             2026-09-10T08:47:26.504Z
+published at             2026-09-10T08:51:08.527Z
 published into           Rastamasta1/kind-of
-carried by intent        fb124e4a-dce3-4109-b0f0-b69fd43e21ed
+carried by intent        eace5080-6c61-44e9-8e7d-08055d154690
 cockpit build            b489046
 ```
 
 ## The previous anchor, so a gap is visible
 
-**This is the first anchor published into this repository.** Nothing
-before it is anchored here. Later anchors will name this one, so any
-gap after this point is visible in this file's git history.
+```
+previous head sequence   32523
+previous head hash       492b2945d855872496ce517a1b91b20e47e9fbfd8bbcdd0d1db7477cd67d8c6a
+previous published at    2026-09-10T08:47:28.937Z
+audit rows added since   59
+```
+
+Consecutive anchors form their own chain inside this repository. If the
+gap above is larger than you expect, that is the point: it is how a
+period with no anchor becomes visible instead of silent. Every previous
+anchor is in this file's git history — `git log .conductor/audit-anchor.md`.
 
 ## What this proves
 
-- Every audit row up to sequence 32523 hashes, in order, to the head
+- Every audit row up to sequence 32582 hashes, in order, to the head
   hash above. Each row's hash covers the previous row's hash, so the
   sequence cannot be reordered, and no row can be removed from the middle
   without the following hashes disagreeing.
 - This file is committed to this repository, so the hash above existed at
   this commit's date — a date recorded in this repository's history, which
   Atrytone does not administer and cannot rewrite.
-- Therefore any later edit to any audit row at or below sequence 32523
+- Therefore any later edit to any audit row at or below sequence 32582
   makes Atrytone's recomputed head disagree with the hash committed here,
   and the disagreement is detectable by anyone holding this file.
 
@@ -66,6 +74,6 @@ gap after this point is visible in this file's git history.
 2. Ask Atrytone to recompute the chain over the same range. Its
    `verify_audit_chain()` walks every row in sequence order, recomputing
    each row's hash from the row's own contents and the previous hash.
-3. The head it produces for sequence 32523 must equal the hash above.
+3. The head it produces for sequence 32582 must equal the hash above.
    If it does not, something at or below that sequence changed after this
    commit was made.
